@@ -19,14 +19,14 @@
         // Variables: Configuration
         _configuration = {},
 
+        // Variables: Timers
+        _timers = {},
+
         // Variables: Strings
         _string = {
             empty: "",
             space: " "
         },
-
-        // Variables: Elements
-        _elements_Type = {},
 
         // Variables: Attribute Names
         _attribute_Name_Options = "data-typey-options";
@@ -66,12 +66,11 @@
 
                 if ( bindingOptions.parsed && isDefinedObject( bindingOptions.result ) ) {
                     bindingOptions = buildAttributeOptions( bindingOptions.result );
+                    bindingOptions.element = element;
 
-                    if ( bindingOptions.render ) {
-                        element.removeAttribute( _attribute_Name_Options );
+                    element.removeAttribute( _attribute_Name_Options );
 
-                        fireCustomTrigger( bindingOptions.onRenderComplete, element );
-                    }
+                    renderText( bindingOptions );
 
                 } else {
                     if ( !_configuration.safeMode ) {
@@ -91,6 +90,79 @@
         return result;
     }
 
+    function renderText( bindingOptions ) {
+        if ( !bindingOptions.delete ) {
+            renderTextForwards( bindingOptions );
+        } else {
+            renderTextBackwards( bindingOptions );
+        }
+    }
+
+    function renderTextForwards( bindingOptions ) {
+        var text = bindingOptions.element.innerText,
+            textCharacterCount = 0,
+            textTimerId = newGuid();
+
+        bindingOptions.element.innerHTML = _string.empty;
+
+        _timers[ textTimerId ] = setInterval( function() {
+            bindingOptions.element.innerHTML = text.substring( 0, textCharacterCount ) + bindingOptions.typingCharacter;
+            textCharacterCount++;
+
+            if ( textCharacterCount > text.length ) {
+                if ( bindingOptions.repeat ) {
+                    textCharacterCount = 0;
+
+                } else {
+                    bindingOptions.element.innerHTML = text;
+                    
+                    fireCustomTrigger( bindingOptions.onRenderComplete, bindingOptions.element );
+                    stopTimer( textTimerId );
+                }
+            }
+
+        }, bindingOptions.speed );
+    }
+
+    function renderTextBackwards( bindingOptions ) {
+        var text = bindingOptions.element.innerText,
+            textCharacterCount = text.length,
+            textTimerId = newGuid();
+
+        bindingOptions.element.innerHTML = _string.empty;
+
+        _timers[ textTimerId ] = setInterval( function() {
+            bindingOptions.element.innerHTML = text.substring( 0, textCharacterCount ) + bindingOptions.typingCharacter;
+            textCharacterCount--;
+
+            if ( textCharacterCount < 0 ) {
+                if ( bindingOptions.repeat ) {
+                    textCharacterCount = text.length;
+
+                } else {
+                    bindingOptions.element.innerHTML = _string.empty;
+
+                    fireCustomTrigger( bindingOptions.onRenderComplete, bindingOptions.element );
+                    stopTimer( textTimerId );
+                }
+            }
+
+        }, bindingOptions.speed );
+    }
+
+    function stopTimers() {
+        for ( var textTimerId in _timers ) {
+            if ( _timers.hasOwnProperty( textTimerId ) ) {
+                stopTimer( textTimerId );
+            }
+        }
+    }
+
+    function stopTimer( textTimerId ) {
+        clearTimeout( _timers[ textTimerId ] );
+        delete _timers[ textTimerId ];
+    }
+
 
     /*
      * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -100,17 +172,12 @@
 
     function buildAttributeOptions( newOptions ) {
         var options = !isDefinedObject( newOptions ) ? {} : newOptions;
-        options.render = getDefaultBoolean( options.render, true );
-
-        options = buildAttributeOptionStrings( options );
+        options.speed = getDefaultNumber( options.speed, 100 );
+        options.typingCharacter = getDefaultString( options.typingCharacter, "_" );
+        options.delete = getDefaultBoolean( options.delete, false );
+        options.repeat = getDefaultBoolean( options.repeat, false );
 
         return buildAttributeOptionCustomTriggers( options );
-    }
-
-    function buildAttributeOptionStrings( options ) {
-        options.removeText = getDefaultString( options.removeText, "X" );
-
-        return options;
     }
 
     function buildAttributeOptionCustomTriggers( options ) {
@@ -152,31 +219,6 @@
 
     function isDefinedArray( object ) {
         return isDefinedObject( object ) && object instanceof Array;
-    }
-
-
-    /*
-     * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-     * Element Handling
-     * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-     */
-
-    function createElement( type, className ) {
-        var result = null,
-            nodeType = type.toLowerCase(),
-            isText = nodeType === "text";
-
-        if ( !_elements_Type.hasOwnProperty( nodeType ) ) {
-            _elements_Type[ nodeType ] = isText ? _parameter_Document.createTextNode( _string.empty ) : _parameter_Document.createElement( nodeType );
-        }
-
-        result = _elements_Type[ nodeType ].cloneNode( false );
-
-        if ( isDefined( className ) ) {
-            result.className = className;
-        }
-
-        return result;
     }
 
 
@@ -271,6 +313,28 @@
 
     /*
      * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+     * String Handling
+     * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+     */
+
+    function newGuid() {
+        var result = [];
+
+        for ( var charIndex = 0; charIndex < 32; charIndex++ ) {
+            if ( charIndex === 8 || charIndex === 12 || charIndex === 16 || charIndex === 20 ) {
+                result.push( "-" );
+            }
+
+            var character = Math.floor( Math.random() * 16 ).toString( 16 );
+            result.push( character );
+        }
+
+        return result.join( _string.empty );
+    }
+
+
+    /*
+     * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
      * Public Functions:  Configuration
      * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
      */
@@ -334,6 +398,10 @@
 
         _parameter_Document.addEventListener( "DOMContentLoaded", function() {
             render();
+        } );
+
+        _parameter_Window.addEventListener( "unload", function() {
+            stopTimers();
         } );
 
         if ( !isDefined( _parameter_Window.$typey ) ) {
