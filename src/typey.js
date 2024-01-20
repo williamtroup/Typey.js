@@ -28,9 +28,6 @@
         // Variables: Elements
         _elements_Type = {},
 
-        // Variables: Control Elements
-        _control_Elements = [],
-
         // Variables: Attribute Names
         _attribute_Name_Options = "data-typey-options";
 
