@@ -16,7 +16,11 @@
       "javascript",
       "css",
       "typey.js",
-      "html"
+      "html",
+      "typewriter",
+      "typing",
+      "type",
+      "delete"
     ],
     "bugs": {
       "url": "https://github.com/williamtroup/Typey.js/issues"
