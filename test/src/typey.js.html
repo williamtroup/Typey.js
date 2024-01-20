@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" user-scalable="no" />
+        <title>Typey.js - Basic</title>
+        <link rel="stylesheet" href="../css/styles.css" />
+        <link rel="stylesheet" href="../../dist/typey.js.css" />
+        <script src="../../src/typey.js"></script>
+    </head>
+
+    <body>
+        <div class="header">
+            <h1 id="header">Typey.js - Basic</h1>
+            <p>This is a basic example of how to use Typey.js to created typed out text.</p>
+        </div>
+
+        <div class="contents">
+        </div>
+    </body>
+
+    <script>
+        document.title += " v" + $typey.getVersion();
+        document.getElementById( "header" ).innerText += " - v" + $typey.getVersion();
+    </script>
+</html>

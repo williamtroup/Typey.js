@@ -1,0 +1,32 @@
+/*
+ * Typey.js Library v0.1.0
+ *
+ * Copyright 2023 Bunoon
+ * Released under the MIT License
+ */
+
+
+/*
+    -------------------------------------------------------------------------
+    Typey.js - Variables
+    -------------------------------------------------------------------------
+*/
+
+:root {
+    // Colors
+    --typey-js-color-black: #3b3a3a;
+    --typey-js-color-white: #F5F5F5;
+    --typey-js-color-gray: #AAAAAA;
+
+    // Borders
+    --typey-js-border-radius: 0.5rem;
+    --typey-js-border-style-scrollbar: inset 0 0 6px --color-dark-gray;
+    --typey-js-border-size: 0.5px;
+
+    // Transitions
+    --typey-js-transition: all .3s;
+
+    // Spacing/Sizing
+    --typey-js-spacing-shadow-size: 4px;
+    --typey-js-spacing: 8px;
+}
