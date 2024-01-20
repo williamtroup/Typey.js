@@ -1,0 +1,25 @@
+{
+    "name": "jtypey.js",
+    "title": "Typey.js",
+    "description": "A lightweight JavaScript library.",
+    "version": "0.1.0",
+    "main": "dist/typey.js",
+    "homepage": "https://www.william-troup.com/typey-js/",
+    "author": {
+      "name": "Bunoon"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/williamtroup/Typey.js"
+    },
+    "keywords": [
+      "javascript",
+      "css",
+      "typey.js",
+      "html"
+    ],
+    "bugs": {
+      "url": "https://github.com/williamtroup/Typey.js/issues"
+    },
+    "license": "MIT"
+  }

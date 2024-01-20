@@ -1,0 +1,1 @@
+nuget pack typey.js.nuspec
