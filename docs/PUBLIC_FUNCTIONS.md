@@ -31,6 +31,6 @@ Returns the version of Typey.js.
 
 ```markdown
 <script> 
-    var version = $select.getVersion();
+    var version = $typey.getVersion();
 </script>
 ```
