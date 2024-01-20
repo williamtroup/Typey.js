@@ -59,7 +59,7 @@ Make sure you include the "DOCTYPE html" tag at the top of your HTML, as follows
 ```
 <br>
 
-### 3. DOM Element Binding / Object Watching:
+### 3. DOM Element Binding:
 
 ```markdown
 <div data-typey-options="{ 'speed': 100 }">
@@ -67,9 +67,9 @@ Make sure you include the "DOCTYPE html" tag at the top of your HTML, as follows
 </div>
 ```
 
-To see a list of all the available binding options you can use for "data-typey-options", and "watch()", click [here](docs/binding/options/OPTIONS.md).
+To see a list of all the available binding options you can use for "data-typey-options" click [here](docs/binding/options/OPTIONS.md).
 
-To see a list of all the available custom triggers you can use for "data-typey-options", and "watch()", click [here](docs/binding/options/CUSTOM_TRIGGERS.md).
+To see a list of all the available custom triggers you can use for "data-typey-options" click [here](docs/binding/options/CUSTOM_TRIGGERS.md).
 
 <br>
 
