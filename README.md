@@ -12,6 +12,9 @@ Typey.js
 > <p align="center">A lightweight JavaScript library for printing text using a typewriter effect.</p>
 > <p align="center">v0.1.0</p>
 <br />
+
+![Heat.js](docs/images/main.png)
+<br>
 <br>
 
 <h1>What features does Typey.js have?</h1>
