@@ -101,7 +101,8 @@
     function renderTextForwards( bindingOptions ) {
         var text = bindingOptions.element.innerText,
             textCharacterCount = 0,
-            textTimerId = newGuid();
+            textTimerId = newGuid(),
+            runCount = 0;
 
         bindingOptions.element.innerHTML = _string.empty;
 
@@ -110,7 +111,9 @@
             textCharacterCount++;
 
             if ( textCharacterCount > text.length ) {
-                if ( bindingOptions.repeat ) {
+                runCount++;
+
+                if ( bindingOptions.repeat && ( !isDefinedNumber( bindingOptions.maximumRepeats ) || runCount < bindingOptions.maximumRepeats ) ) {
                     textCharacterCount = 0;
 
                 } else {
@@ -127,7 +130,8 @@
     function renderTextBackwards( bindingOptions ) {
         var text = bindingOptions.element.innerText,
             textCharacterCount = text.length,
-            textTimerId = newGuid();
+            textTimerId = newGuid(),
+            runCount = 0;
 
         bindingOptions.element.innerHTML = _string.empty;
 
@@ -136,7 +140,9 @@
             textCharacterCount--;
 
             if ( textCharacterCount < 0 ) {
-                if ( bindingOptions.repeat ) {
+                runCount++;
+                
+                if ( bindingOptions.repeat && ( !isDefinedNumber( bindingOptions.maximumRepeats ) || runCount < bindingOptions.maximumRepeats ) ) {
                     textCharacterCount = text.length;
 
                 } else {
@@ -176,6 +182,7 @@
         options.typingCharacter = getDefaultString( options.typingCharacter, "_" );
         options.delete = getDefaultBoolean( options.delete, false );
         options.repeat = getDefaultBoolean( options.repeat, false );
+        options.maximumRepeats = getDefaultNumber( options.maximumRepeats, null );
 
         return buildAttributeOptionCustomTriggers( options );
     }

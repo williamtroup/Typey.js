@@ -12,6 +12,7 @@ Below are all the JSON properties that can be passed in the "data-typey-options"
 | *string* | typingCharacter | States the typing character(s) that should be shown (defaults to "_"). |
 | *boolean* | delete | States if the text should shown a delete typing effect (defaults to false). |
 | *boolean* | repeat | States if the typing effect should always repeat (defaults to false). |
+| *number* | maximumRepeats | States how many times the typing animation should be repeated (defaults to infinite). |
 
 <br/>
 
