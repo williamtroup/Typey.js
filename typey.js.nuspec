@@ -4,7 +4,7 @@
         <id>jTypey.js</id>
         <version>0.1.0</version>
         <title>Typey.js</title>
-        <description>A lightweight JavaScript library.</description>
+        <description>A lightweight JavaScript library for printing text using a typewriter effect.</description>
         <authors>William Troup</authors>
         <projectUrl>https://www.william-troup.com/typey-js/</projectUrl>
         <repository type="git" url="https://github.com/williamtroup/typey.js" branch="main" />

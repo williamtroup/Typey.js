@@ -1,7 +1,7 @@
 {
     "name": "jtypey.js",
     "title": "Typey.js",
-    "description": "A lightweight JavaScript library.",
+    "description": "A lightweight JavaScript library for printing text using a typewriter effect.",
     "version": "0.1.0",
     "main": "dist/typey.js",
     "homepage": "https://www.william-troup.com/typey-js/",

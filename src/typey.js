@@ -1,7 +1,7 @@
 /**
  * Typey.js
  * 
- * A lightweight JavaScript library.
+ * A lightweight JavaScript library for printing text using a typewriter effect.
  * 
  * @file        typey.js
  * @version     v0.1.0
