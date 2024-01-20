@@ -70,6 +70,7 @@
 
                     element.removeAttribute( _attribute_Name_Options );
 
+                    fireCustomTrigger( bindingOptions.onBeforeRender, bindingOptions.element );
                     renderText( bindingOptions );
 
                 } else {
@@ -188,6 +189,7 @@
     }
 
     function buildAttributeOptionCustomTriggers( options ) {
+        options.onBeforeRender = getDefaultFunction( options.onBeforeRender, null );
         options.onRenderComplete = getDefaultFunction( options.onRenderComplete, null );
 
         return options;

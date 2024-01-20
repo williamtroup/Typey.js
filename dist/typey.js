@@ -26,6 +26,7 @@
           bindingOptions = buildAttributeOptions(bindingOptions.result);
           bindingOptions.element = element;
           element.removeAttribute(_attribute_Name_Options);
+          fireCustomTrigger(bindingOptions.onBeforeRender, bindingOptions.element);
           renderText(bindingOptions);
         } else {
           if (!_configuration.safeMode) {
@@ -113,6 +114,7 @@
     return buildAttributeOptionCustomTriggers(options);
   }
   function buildAttributeOptionCustomTriggers(options) {
+    options.onBeforeRender = getDefaultFunction(options.onBeforeRender, null);
     options.onRenderComplete = getDefaultFunction(options.onRenderComplete, null);
     return options;
   }
