@@ -337,7 +337,6 @@
 
         _parameter_Document.addEventListener( "DOMContentLoaded", function() {
             render();
-            buildGlobalDocumentEvents();
         } );
 
         if ( !isDefined( _parameter_Window.$typey ) ) {
